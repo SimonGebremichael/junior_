@@ -50,7 +50,7 @@ header p:hover {
     display: grid;
     grid-template-columns: 40% 60%;
     height: 95vh;
-    margin-top: 7vh;
+    padding-top: 7vh;
 }
 
 #slide1 {
@@ -59,7 +59,7 @@ header p:hover {
 
 #slide1 h1 {
     font-size: 65px;
-    margin-top: 25vh;
+    margin-top: 45vh;
 }
 
 #slide1 button {
@@ -97,7 +97,7 @@ i:hover {
     display: grid;
     grid-template-columns: 33.33% 33.33% 33.33%;
     grid-template-rows: 33.33% 33.33% 33.33%;
-    height: 100vh;
+    height: 93vh;
     width: 100%;
 }
 
