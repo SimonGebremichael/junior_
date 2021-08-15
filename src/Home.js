@@ -1,9 +1,8 @@
 import React from "react";
 import Form from "./Form";
-import GoogleMapReact from "google-map-react";
 import $ from "jquery";
-import "./style.css";
 import "./slide.css";
+import "./style.css";
 import "./animate.min.css";
 import Geolocation from "./geo.PNG";
 import Services from "./services.jpg";
