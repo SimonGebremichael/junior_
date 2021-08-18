@@ -170,7 +170,7 @@ export default class Home extends React.Component {
         </div>
 
         <Form />
-        <Footer />
+        {/* <Footer /> */}
       </>
     );
   }
@@ -336,8 +336,8 @@ const Footer = () => {
   return (
     <footer>
       <p>Contact us:</p>
-      <i className="fas fa-phone-alt"></i>
-      <p>(647) 888-3079</p>
+      {/* <i className="fas fa-phone-alt"></i>
+      <p>(647) 888-3079</p> */}
 
       <i className="fas fa-envelope"></i>
       <p>
