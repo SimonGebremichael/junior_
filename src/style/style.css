@@ -25,6 +25,7 @@ a {
     color: white;
 }
 
+
 /* ------------------covid-------------------- */
 
 #covid {
@@ -60,6 +61,7 @@ a {
 #covid i:hover {
     color: black !important;
 }
+
 
 /* ------------------header------------------- */
 
@@ -116,6 +118,7 @@ header a:hover {
     font-size: bold;
 }
 
+
 /* ------------------intro---------------- */
 
 #intro {
@@ -133,7 +136,10 @@ header a:hover {
     margin-top: 36vh;
 }
 
-#slide1 select, #slide1 label, #slide1 label, #goto_city {
+#slide1 select,
+#slide1 label,
+#slide1 label,
+#goto_city {
     border: none;
     font-size: 35px;
     font-weight: bold;
@@ -144,7 +150,8 @@ header a:hover {
     font-weight: normal;
 }
 
-#slide1 option, #goto_city option {
+#slide1 option,
+#goto_city option {
     background-color: white;
     color: black;
 }
@@ -162,6 +169,7 @@ header a:hover {
     color: tomato;
     cursor: pointer;
 }
+
 
 /* -------------------about---------------- */
 
@@ -204,6 +212,7 @@ header a:hover {
     cursor: pointer;
 }
 
+
 /* ---------------------location------------- */
 
 #location {
@@ -245,6 +254,13 @@ header a:hover {
     color: white;
 }
 
+#reach li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
 /* -----------------------covid 2----------------- */
 
 #covid2 {
@@ -264,6 +280,7 @@ header a:hover {
 #covidInfo i:not(#titleTage) {
     width: 40px;
 }
+
 
 /* -------------------form-------------- */
 
@@ -308,7 +325,11 @@ header a:hover {
     opacity: 0.7;
 }
 
-#form input[type="text"], #form input[type="email"], #form input[type="date"], #form select, textarea {
+#form input[type="text"],
+#form input[type="email"],
+#form input[type="date"],
+#form select,
+textarea {
     padding: 10px;
     border: none;
     width: 80%;
@@ -353,6 +374,7 @@ table td {
     padding: 5px 15px 0 0;
 }
 
+
 /* -------------------review--------- */
 
 #review {
@@ -374,6 +396,7 @@ table td {
     font-size: 1vw;
     font-style: italic;
 }
+
 
 /* -----------------preview------------- */
 
@@ -415,6 +438,7 @@ table td {
     background-color: tomato;
     cursor: pointer;
 }
+
 
 /* ----------------foooter----------- */
 

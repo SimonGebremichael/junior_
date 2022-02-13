@@ -3,7 +3,7 @@ export default function start() {
     <div id="intro">
       <div id="slide1">
         <h1>
-          JS
+          4GEN
           <br />
           HANDYMAN
           <br />

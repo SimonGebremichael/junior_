@@ -32,7 +32,18 @@ export default function start() {
             <li>London</li>
           </ul>
         </p>
-        <br />
+        <br/>
+        <p>Reach us</p>
+        <ul id="reach">
+          <li>
+            <i className="fas fa-phone-square-alt fa-1x"></i>
+            <p>+1 (647) 888 - 3079</p>
+          </li>
+          <li>
+            <i className="fas fa-envelope fa-1x"></i>
+            <p>4genhandymanservice@mail.com</p>
+          </li>
+        </ul><br/>
         <a href="#form">
           <button>Book A Service</button>
         </a>
