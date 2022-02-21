@@ -65,21 +65,16 @@ a {
 
 /* ------------------header------------------- */
 
-header {
+.split {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
     color: black;
-    height: 7vh;
-    padding-top: 15px;
-}
-
-header #logo {
-    width: 63vw;
-    padding-top: 15px;
+    padding: 10px 15px;
 }
 
 header label {
-    margin: 3%;
     padding: 3px 14px;
     color: white;
     background-color: black;
@@ -101,13 +96,10 @@ header label i:hover {
 }
 
 header a {
-    /* color: white !important; */
     text-align: center;
 }
 
 header a {
-    width: 10vw;
-    text-align: center;
     font-weight: bold;
     font-size: 21px;
 }
@@ -116,6 +108,12 @@ header a:hover {
     cursor: pointer;
     color: tomato;
     font-size: bold;
+}
+
+.align {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 
@@ -132,7 +130,7 @@ header a:hover {
 }
 
 #slide1 h1 {
-    font-size: 4vw;
+    font-size: 55px;
     margin-top: 36vh;
 }
 
@@ -460,12 +458,6 @@ footer i {
 }
 
 @media only screen and (max-width: 1100px) {
-    header #logo {
-        width: 60vw;
-    }
-    header a {
-        width: 13vw;
-    }
     #intro {
         grid-template-columns: 100%;
     }
@@ -508,22 +500,9 @@ footer i {
     #about img {
         display: none;
     }
-    header h1 {
-        width: 35vw;
-    }
-    header p {
-        width: 15vw;
-    }
     #review div p {
         font-size: 16px;
     }
 }
 
-@media only screen and (max-width: 600px) {
-    header h1 {
-        width: 90vw;
-    }
-    header p {
-        display: none;
-    }
-}
+@media only screen and (max-width: 600px) {}

@@ -2,13 +2,7 @@ export default function start() {
   return (
     <div id="intro">
       <div id="slide1">
-        <h1>
-          4GEN
-          <br />
-          HANDYMAN
-          <br />
-          SERVICE
-        </h1>
+        <h1>4GEN<br /> HANDYMAN<br />SERVICE</h1>
         <br />
         <label>Book A Service</label>
         <select id="bookservice" href="#form">

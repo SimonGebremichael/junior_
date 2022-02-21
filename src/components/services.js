@@ -10,7 +10,7 @@ export default function start() {
         <p id="about_des">
           We provide top of the line repairs and installations. We offer a
           varity of services to meet your needs. Built with your satisfaction in
-          mind. With a high satisfaction rating and great customer reviews JSHS
+          mind. With a high satisfaction rating and great customer reviews 4GHMS
           is deticated to providing you with the best services we are able to
           offer.
           <br />
@@ -19,7 +19,6 @@ export default function start() {
           reach out to you. Please allow up 2-5 business for a response. We
           appriciate your time and business. Below are the services we offer.
         </p>
-
         <PrntServices Servs={Servs} />
       </div>
       <img src={ServicesPNG} />

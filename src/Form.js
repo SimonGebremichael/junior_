@@ -1,13 +1,8 @@
 import React from "react";
-import emailjs, { init } from "emailjs-com";
-init("user_rbuVxVRzM6JZvEhg86QKF");
 
 export default class Form extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  constructor(props) { super(props);}
   componentDidMount() {}
-
   render() {
     return (
       <div id="form" className="section">
@@ -63,8 +58,7 @@ export default class Form extends React.Component {
             <font color="lightgreen">100%</font> Satisfaction Rate
           </h3>
         </div>
-
-        <form id="formFeild" onSubmit={sendEmail}>
+        <div id="formFeild">
           <h1>Contact Form</h1>
           <br />
           <div id="form_top">
@@ -84,7 +78,7 @@ export default class Form extends React.Component {
             <div>
               <p>City:</p>
               <select id="city" name="city">
-                <option defaultValue="Kitchener">Kitchener</option>
+                <option value="Kitchener" selected>Kitchener</option>
                 <option value="Waterloo">Waterloo</option>
                 <option value="Guelph">Quelph</option>
                 <option value="Cambridge">Cambridge</option>
@@ -92,7 +86,7 @@ export default class Form extends React.Component {
               </select>
               <p>Service:</p>
               <select id="service" name="service">
-                <option defaultValue="Framing">Framing</option>
+                <option value="Framing" selected>Framing</option>
                 <option value="Plubming">Plubming</option>
                 <option value="Electrical">Electrical</option>
                 <option value="Repair">Repair</option>
@@ -109,10 +103,9 @@ export default class Form extends React.Component {
               ></textarea>
             </div>
           </div>
-          <input type="submit" id="formSubmitBTN" value="SEND" />
-        </form>
-        <div>
-          <div id="formOver">
+          <input type="submit" onClick={sendEmail} id="formSubmitBTN" value="SEND" />
+        </div>
+        <div id="formOver">
             <center>
               <i class="far fa-check-circle fa-5x"></i>
             </center>
@@ -125,47 +118,68 @@ export default class Form extends React.Component {
               <p>You will hear from us within 2 business days.</p>
             </center>
           </div>
-        </div>
       </div>
     );
   }
 }
-
-function sendEmail(e) {
-  e.preventDefault();
-  if (validate())
-    emailjs
-      .sendForm(
-        "service_zokpqci",
-        "template_950qq1e",
-        e.target,
-        "user_rbuVxVRzM6JZvEhg86QKF"
-      )
-      .then(
-        (result) => {
-          console.log("email status: " + result.text);
-          if (result.text == "OK") {
-            document.getElementById("formFeild").style.display = "none";
-            document.getElementById("formOver").style.display = "block";
-          }
-        },
-        (error) => console.log("email status: " + error.text)
-      );
+var formSend = false;
+async function sendEmail() {
+  if (validateForm() && !formSend) {
+      formSend = true;
+      let xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://localhost:3001/4gen');
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.responseType = 'json';
+      xhr.onload = function() {
+        let responseObj = xhr.response;
+        console.log(responseObj);
+      };
+      await xhr.send(JSON.stringify({
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        dateOfService: document.getElementById("dateOfService").value,
+        des: document.getElementById("des").value,
+        service: document.getElementById("service").value,
+        city: document.getElementById("city").value,
+        phonenumber: document.getElementById("phonenumber").value }));
+      setTimeout(() => {
+        formSend = false;
+        document.getElementById("formOver").style.display = "block";
+        document.getElementById("formFeild").style.display = "none";
+      }, 3000);
+  } else console.log("*invalid form*");
 }
 
-function validate() {
-  var pass = true,
-    feilds = [
-      document.getElementById("name"),
-      document.getElementById("email"),
-      document.getElementById("dateOfService"),
-      document.getElementById("des"),
-    ];
-  for (var i = 0; i < feilds.length; i++) {
-    if (feilds[i].value.length <= 0) {
-      pass = false;
-      feilds[i].style.border = "1px solid red";
-    } else feilds[i].style.border = "none";
+function validateForm() {
+  var pass = true;
+  document.getElementById("name").style.border = "none";
+  document.getElementById("email").style.border = "none";
+  document.getElementById("dateOfService").style.border = "none";
+  if (!document.getElementById("name").value) {
+    document.getElementById("name").style.border = "1px solid red";
+    pass = false;
+  } 
+  if (!isEmail(document.getElementById("email").value)) {
+    document.getElementById("email").style.border = "1px solid red";
+    pass = false;
+  } 
+  if (!cvtDate(document.getElementById("dateOfService").value)) {
+    document.getElementById("dateOfService").style.border = "1px solid red";
+    pass = false;
   }
   return pass;
+}
+
+function cvtDate(date) {
+  if (date == "" || !date) return false;
+  try {
+    var d = new Date(date);
+    return `${d.toLocaleString("default", { month: "short"})} ${d.getDate()}, ${d.getFullYear()}`;
+  } catch(e) {return false};
+}
+
+function isEmail(email) {
+  if (!email || email == "") return false;
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
 }
