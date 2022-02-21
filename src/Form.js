@@ -127,7 +127,8 @@ async function sendEmail() {
   if (validateForm() && !formSend) {
       formSend = true;
       let xhr = new XMLHttpRequest();
-      xhr.open('POST', 'http://localhost:3001/4gen');
+      // xhr.open('POST', 'http://localhost:3001/4gen');
+      xhr.open('POST', 'https://tsukiyome.herokuapp.com/4gen');
       xhr.setRequestHeader("Content-type", "application/json");
       xhr.responseType = 'json';
       xhr.onload = function() {
