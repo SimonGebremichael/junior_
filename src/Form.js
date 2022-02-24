@@ -8,54 +8,24 @@ export default class Form extends React.Component {
       <div id="form" className="section">
         <div id="qoutes">
           <h3>
-            Let us know you need & we'll get to you{" "}
+            Let us know what you need & we'll get to you{" "}
             <font color="lightgreen">ASAP</font>
           </h3>
           <br />
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>mon</td>
-                <td>7am - 5pm</td>
-              </tr>
-              <tr>
-                <td>tue</td>
-                <td>7am - 5pm</td>
-              </tr>
-              <tr>
-                <td>wed</td>
-                <td>7am - 5pm</td>
-              </tr>
-              <tr>
-                <td>thr</td>
-                <td>7am - 5pm</td>
-              </tr>
-              <tr>
-                <td>fri</td>
-                <td>7am - 5pm</td>
-              </tr>
-              <tr>
-                <td>sat</td>
-                <td>9am - 6pm</td>
-              </tr>
-              <tr>
-                <td>sun</td>
-                <td>9am - 6pm</td>
-              </tr>
-            </tbody>
-          </table>
-
+          <div id="cont">
+            <p>mon</p><p>7am - 5pm</p>
+            <p>tue</p><p>7am - 5pm</p>
+            <p>wed</p><p>7am - 5pm</p>
+            <p>thr</p><p>7am - 5pm</p>
+            <p>fri</p><p>7am - 5pm</p>
+            <p>sat</p><p>9am - 6pm</p>
+            <p>sun</p><p>9am - 6pm</p>
+          </div>
           <h3>
             Residential <font color="lightgreen">+</font> Commerical
           </h3>
           <h3>
-            <font color="lightgreen">100%</font> Satisfaction Rate
+            <font color="lightgreen">99%</font> Satisfaction Rate
           </h3>
         </div>
         <div id="formFeild">
@@ -64,20 +34,15 @@ export default class Form extends React.Component {
           <div id="form_top">
             <p>Name:</p>
             <p>Email:</p>
-            <input type="text" placeholder="Name" name="name" id="name" />
-            <input type="email" placeholder="email" name="email" id="email" />
+            <input type="text" placeholder="Name" id="name" />
+            <input type="text" type="email" placeholder="email" id="email" />
             <p>Phone Number:</p>
             <p>Desired Date:</p>
-            <input
-              type="text"
-              placeholder="(123)-456-7890"
-              name="phonenumber"
-              id="phonenumber"
-            />
-            <input type="date" name="dateOfService" id="dateOfService" />
+            <input type="text" placeholder="(123)-456-7890" id="phonenumber"/>
+            <input type="date" id="dateOfService" />
             <div>
               <p>City:</p>
-              <select id="city" name="city">
+              <select id="city">
                 <option value="Kitchener" selected>Kitchener</option>
                 <option value="Waterloo">Waterloo</option>
                 <option value="Guelph">Quelph</option>
@@ -85,7 +50,7 @@ export default class Form extends React.Component {
                 <option value="Other">Other</option>
               </select>
               <p>Service:</p>
-              <select id="service" name="service">
+              <select id="service">
                 <option value="Framing" selected>Framing</option>
                 <option value="Plubming">Plubming</option>
                 <option value="Electrical">Electrical</option>
@@ -97,7 +62,6 @@ export default class Form extends React.Component {
               <p>Description:</p>
               <textarea
                 rows="5px"
-                name="des"
                 id="des"
                 placeholder="Any more information..."
               ></textarea>
@@ -123,26 +87,34 @@ export default class Form extends React.Component {
   }
 }
 var formSend = false;
-async function sendEmail() {
+function sendEmail() {
   if (validateForm() && !formSend) {
       formSend = true;
-      let xhr = new XMLHttpRequest();
-      // xhr.open('POST', 'http://localhost:3001/4gen');
-      xhr.open('POST', 'https://tsukiyome.herokuapp.com/4gen');
-      xhr.setRequestHeader("Content-type", "application/json");
-      xhr.responseType = 'json';
-      xhr.onload = function() {
-        let responseObj = xhr.response;
-        console.log(responseObj);
-      };
-      await xhr.send(JSON.stringify({
+      var data = {
         name: document.getElementById("name").value,
         email: document.getElementById("email").value,
         dateOfService: document.getElementById("dateOfService").value,
         des: document.getElementById("des").value,
         service: document.getElementById("service").value,
         city: document.getElementById("city").value,
-        phonenumber: document.getElementById("phonenumber").value }));
+        phonenumber: document.getElementById("phonenumber").value 
+      };
+      let str = Object.entries(data).map(([key, val]) => `${key}=${val}`).join('&');
+      var url = `https://tsukiyome.herokuapp.com/4gen?${str}`;
+      console.log(url);
+      let xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      // xhr.setRequestHeader("Content-type", "application/json");
+      // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+      xhr.responseType = 'json';
+      xhr.onload = function() {
+        let responseObj = xhr.response;
+        console.log(responseObj);
+        formSend = false;
+        document.getElementById("formOver").style.display = "block";
+        document.getElementById("formFeild").style.display = "none";
+      };
+      xhr.send();
       setTimeout(() => {
         formSend = false;
         document.getElementById("formOver").style.display = "block";
